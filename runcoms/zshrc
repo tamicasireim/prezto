@@ -3,11 +3,121 @@
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
+#   Marie Simatic <marie@simatic.org>
 #
+
+if [ -x /usr/games/cowsay ] && [ -x /usr/games/fortune ] && [ -x /usr/games/lolcat ]
+then
+    fortune | cowsay -f dragon | lolcat
+fi
+
+################################################################################
+#                                  PREZTO                                      #
+################################################################################
+
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/scripts/solorized_terminal.sh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/scripts/solorized_terminal.sh"
+fi
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+export TERM=xterm-256color
+
+################################################################################
+#                                  FZF                                         #
+################################################################################
+
+# Alt C to cd into selected directory
+# C-R to search into history
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+################################################################################
+#                             CUSTOMS ALIASES                                  #
+################################################################################
+
+alias mkdir="mkdir -p"
+
+alias e='editor'
+alias v='vim'
+alias n='nvim'
+alias enw='emacs -nw'
+
+alias grh='git reset --hard'
+
+alias catc='colorize'
+alias maj='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+
+################################################################################
+#                             CUSTOMS SHORTCUTS                                #
+################################################################################
+
+export KEYTIMEOUT=40
+bindkey -M viins 'jk' vi-cmd-mode
+
+# Incremental search is elite!
+bindkey -M vicmd "/" history-incremental-search-backward
+bindkey -M vicmd "?" history-incremental-search-forward
+
+# push a line while you type another command
+bindkey '^P' push-line
+
+# allow ctrl-a and ctrl-e to move to beginning/end of line
+bindkey '^a' beginning-of-line
+bindkey '^e' end-of-line
+
+# it's like, space AND completion.  Gnarlbot.
+bindkey -M viins ' ' magic-space
+################################################################################
+#                             CUSTOMS FUNCTIONS                                #
+################################################################################
+
+mcd () {
+    mkdir -p $1
+    cd $1
+}
+
+alias ex='extract'
+function extract {
+    if [ -z "$1" ]; then
+        # display usage if no parameters given
+        echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    else
+        if [ -f $1 ] ; then
+            # NAME=${1%.*}
+            # mkdir $NAME && cd $NAME
+            case $1 in
+                *.tar.bz2)   tar xvjf ../$1    ;;
+                *.tar.gz)    tar xvzf ../$1    ;;
+                *.tar.xz)    tar xvJf ../$1    ;;
+                *.lzma)      unlzma ../$1      ;;
+                *.bz2)       bunzip2 ../$1     ;;
+                *.rar)       unrar x -ad ../$1 ;;
+                *.gz)        gunzip ../$1      ;;
+                *.tar)       tar xvf ../$1     ;;
+                *.tbz2)      tar xvjf ../$1    ;;
+                *.tgz)       tar xvzf ../$1    ;;
+                *.zip)       unzip ../$1       ;;
+                *.Z)         uncompress ../$1  ;;
+                *.7z)        7z x ../$1        ;;
+                *.xz)        unxz ../$1        ;;
+                *.exe)       cabextract ../$1  ;;
+                *)           echo "extract: '$1' - unknown archive method" ;;
+            esac
+        else
+            echo "$1 - file does not exist"
+        fi
+    fi
+}
+
+tm() {
+    local session
+    newsession=${1:-new}
+    session=$(tmux list-sessions -F "#{session_name}" | \
+        fzf --query="$1" --select-1 --exit-0) &&
+        tmux attach-session -t "$session" || tmux new-session -s $newsession
+}
