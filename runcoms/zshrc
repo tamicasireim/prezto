@@ -52,6 +52,23 @@ alias grh='git reset --hard'
 alias catc='colorize'
 alias maj='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
+
+unalias rm
+
+################## ALIAS GLOBAUX
+
+alias -g G='| ag '
+alias -g L='| lolcat '
+
+################## ALIAS DE SUFFIXES
+
+alias -s org='emacs -nw '
+alias -s pdf='zathura '
+alias -s tex='editor '
+
 ################################################################################
 #                             CUSTOMS SHORTCUTS                                #
 ################################################################################
