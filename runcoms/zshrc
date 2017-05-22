@@ -15,9 +15,9 @@ fi
 #                                  PREZTO                                      #
 ################################################################################
 
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/scripts/solorized_terminal.sh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/scripts/solorized_terminal.sh"
-fi
+# if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/scripts/solorized_terminal.sh" ]]; then
+  # source "${ZDOTDIR:-$HOME}/.zprezto/scripts/solorized_terminal.sh"
+# fi
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -73,7 +73,7 @@ alias -s tex='editor '
 #                             CUSTOMS SHORTCUTS                                #
 ################################################################################
 
-export KEYTIMEOUT=40
+export KEYTIMEOUT=30
 bindkey -M viins 'jk' vi-cmd-mode
 
 # Incremental search is elite!
