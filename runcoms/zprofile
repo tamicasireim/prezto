@@ -71,3 +71,9 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+
+if [ -x /usr/games/cowsay ] && [ -x /usr/games/fortune ] && [ -x /usr/games/lolcat ]
+then
+    fortune | cowsay -f dragon | lolcat
+fi

@@ -6,10 +6,6 @@
 #   Marie Simatic <marie@simatic.org>
 #
 
-if [ -x /usr/games/cowsay ] && [ -x /usr/games/fortune ] && [ -x /usr/games/lolcat ]
-then
-    fortune | cowsay -f dragon | lolcat
-fi
 
 ################################################################################
 #                                  PREZTO                                      #
@@ -24,7 +20,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-export TERM=xterm-256color
+# export TERM=xterm-256color
 
 ################################################################################
 #                                  FZF                                         #
