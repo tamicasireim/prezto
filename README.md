@@ -36,6 +36,14 @@ or, using ssh
         done
         ```
 
+        Plus setup externals stuff
+
+        ```
+        setopt EXTENDED_GLOB
+        for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/external/^README.md(.N); do
+          ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+        done
+        ```
      Note: If you already have any of the given config files, ln will error. In
      simple cases you can add `source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"` to
      the bottom of your `.zshrc` to load prezto but keep your config intact. For

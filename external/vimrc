@@ -85,6 +85,8 @@ set laststatus=2
 
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
+
+Plug 'edkolev/tmuxline.vim'
 " }}}
 
 " some theme {{{
@@ -121,6 +123,8 @@ Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'latex', 'tex'] }
 Plug 'junegunn/limelight.vim'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
+
+autocmd FileType gitcommit exec 'au VimEnter * startinsert'
 
 call plug#end()
 " }}}
