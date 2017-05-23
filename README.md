@@ -5,6 +5,9 @@ Prezto is the configuration framework for [Zsh][1]; it enriches the command line
 interface environment with sane defaults, aliases, functions, auto completion,
 and prompt themes.
 
+This repo is my fork. It contains an "external" directory containing urxvt, vim and 
+tmux configurations
+
 Installation
 ------------
 
@@ -17,7 +20,11 @@ version is 4.3.17.
 
   2. Clone the repository:
 
-        `git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"`
+        `git clone --recursive https://github.com/tamicasireim/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"`
+
+or, using ssh
+
+        `git clone --recursive git@github.com:tamicasireim/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"`
 
   3. Create a new Zsh configuration by copying the Zsh configuration files
      provided:

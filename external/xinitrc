@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# see https://wiki.ubuntu.com/CustomXSession
+# to make this file work in ubuntu
+
+xrdb -merge .Xressources &
+feh --bg-fill ~/Dropbox/Wallpapers/life_is_strange2.png &
+# setxkbmap -option ctrl:swapcaps &     # Swap Left Control and Caps Lock
+caps2esc & # from https://github.com/alexandre/caps2esc
+# gnome-settings-daemon &
+# emacs --daemon & only usefull when using emacs as much as a lot.
+nm-applet &
+# indicator-diskman &
+# dropbox start &
+nextcloud &
+unclutter -root &
+urxvtd -q -o -f &
+
+# exec awesome
+exec ssh-agent i3
