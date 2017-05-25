@@ -79,10 +79,30 @@ smap <m-p> <Plug>snipMateBack
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='term'
 set laststatus=2
 
+" change mode display
+let g:airline_mode_map = {
+            \ '__' : '-',
+            \ 'n'  : 'N',
+            \ 'i'  : 'I',
+            \ 'R'  : 'R',
+            \ 'c'  : 'C',
+            \ 'v'  : 'V',
+            \ 'V'  : 'V',
+            \ '' : 'V',
+            \ 's'  : 'S',
+            \ 'S'  : 'S',
+            \ '' : 'S',
+            \ }
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_tabs = 0
+let g:airline#extensions#tabline#buffer_min_count = 2
+
+let g:airline#extensions#tabline#tabs_label = 't'
+let g:airline#extensions#tabline#buffers_label = 'b'
 Plug 'airblade/vim-gitgutter'
 set updatetime=250
 
@@ -116,7 +136,8 @@ endif
 Plug 'benmills/vimux'
 
 " vim wiki
-Plug 'vimwiki/vimwiki', {'on' : 'VimwikiIndex'}
+Plug 'vimwiki/vimwiki'
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 Plug 'fountain.vim'
 
 Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'latex', 'tex'] }
