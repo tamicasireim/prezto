@@ -24,7 +24,8 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>m :CtrlPMRUFiles<CR>
 nnoremap <Leader>l :CtrlPLine<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
+" nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <leader>l :ls<CR>:b<space>
 " }}}
 
 " Plugins d'édition de texte {{{
@@ -79,7 +80,7 @@ smap <m-p> <Plug>snipMateBack
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
-let g:airline_theme='term'
+let g:airline_theme='kalisi'
 set laststatus=2
 
 " change mode display
@@ -113,6 +114,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'muellan/am-colors'
 Plug 'junegunn/seoul256.vim'
+Plug 'freeo/vim-kalisi'
 " }}}
 
 " :Ack [options] {pattern} [{directories}]
@@ -138,14 +140,21 @@ Plug 'benmills/vimux'
 " vim wiki
 Plug 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-Plug 'fountain.vim'
+
+" syntax plugins
+" {{{
+Plug 'vim-scripts/fountain.vim'
+Plug 'PotatoesMaster/i3-vim-syntax'
+"}}}
 
 Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'latex', 'tex'] }
 Plug 'junegunn/limelight.vim'
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-autocmd FileType gitcommit exec 'au VimEnter * startinsert'
+Plug 'tpope/vim-fugitive'
+
+
 
 call plug#end()
 " }}}
@@ -157,15 +166,18 @@ set number " Show line number
 set background=dark
 set t_Co=256
 try
-    colorscheme seoul256
+    colorscheme kalisi
 catch
     colorscheme elflord
 endtry
 
+
 set cursorline          " highlight current line
-filetype indent on      " load filetype-specific indent files
+" disable cursorline on insert mode
 autocmd InsertEnter * set nocul
 autocmd InsertLeave * set cul
+
+set relativenumber
 
 " change cursor style according to mode (works for VTE Terminals (urxvt...))
 let &t_SI = "\<Esc>[6 q"
@@ -176,6 +188,7 @@ let &t_EI = "\<Esc>[2 q"
 
 " Vim Behaviour tweaking
 "{{{
+filetype indent on      " load filetype-specific indent files
 set noswapfile   " No swap file
 set lazyredraw   " Vim won't redraw sreen while executing Macro
 set shortmess+=I "The intro message won't display
@@ -232,6 +245,8 @@ map <Leader>i :noh<CR>:<CR>
 
 " changing the backspace behaviour : deleting indent, start of line...
 set backspace=indent,eol,start
+
+autocmd FileType gitcommit exec 'au VimEnter * startinsert'
 
 set modelines=1 " make vim look at the end of file for indent parameters etc.
 " }}}

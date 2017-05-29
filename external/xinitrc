@@ -15,6 +15,7 @@ nm-applet &
 nextcloud &
 unclutter -root &
 urxvtd -q -o -f &
+conky -c .conky/conky_clock_stat &
 
 # exec awesome
 exec ssh-agent i3
