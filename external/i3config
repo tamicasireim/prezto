@@ -27,10 +27,6 @@ set $term urxvt
 # modifier : super
 set $mod Mod4
 
-# controllers pour les workspaces
-set $control ~/.config/i3/workspace_controller.py
-
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -177,8 +173,8 @@ set $ws4 4
 set $ws5 5
 set $ws6 6
 set $ws7 7
-set $ws8 8
-set $ws9 9
+set $ws8 8:♪
+set $ws9 9:mail
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -287,6 +283,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 assign [class="Thunderbird"] $ws9
+assign [class="Clementine"] $ws8
 # for_window [class="Thunderbird"] workspace 9
 
 for_window [urgent=latest] focus
