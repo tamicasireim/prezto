@@ -8,58 +8,55 @@ augroup reload_vimrc " {
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END " }
 
-
 " Plugins with Vim Plug
 " {{{
+" autoinstall vim plug
+if empty(glob("~/.vim/autoload/plug.vim"))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    auto VimEnter * PlugInstall
+endif
 call plug#begin('~/.vim/plugged')
 
-" navigation (fzf, ctrlp){{{
+""""""""""""""""""""""""""""""""""
+"""""" Navigation """"""""""""""""
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all', 'on': 'FZF' }
 map <Leader>f :FZF<CR>
 
 " ctrlp
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'ctrlpvim/ctrlp.vim', {'on': ['CtrlP', 'CtrlPMRUFiles', 'CtrlPLine']}
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>m :CtrlPMRUFiles<CR>
 nnoremap <Leader>l :CtrlPLine<CR>
 " nnoremap <Leader>b :CtrlPBuffer<CR>
 nnoremap <leader>l :ls<CR>:b<space>
-" }}}
 
-" Plugins d'édition de texte {{{
-" provides '.' command for plugins
-Plug 'tpope/vim-repeat'
+""""""""""""""""""""""""""""""""""
+"""""" Edition de texte  """""""""
+""""""""""""""""""""""""""""""""""
+Plug 'tpope/vim-repeat'             " provides '.' command for plugins
 
-" provides the exchange command
-" cxMOTION then cxMOTION
-Plug 'tommcdo/vim-exchange'
+Plug 'tommcdo/vim-exchange'         " provides the exchange command
+                                    " cxMOTION then cxMOTION
 
-" provides surround command
-" cs to change surround, ys to add surround, ds... S in visual mode
-Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'           " provides surround command
+                                    " cs to change surround, ys to add surround,
+                                    "ds... S in visual mode
 
-" change the way i[, i{ works. You don't have to be inside a parenthesis for
-" it to work, it automatically select the correct one.
-Plug 'wellle/targets.vim'
+Plug 'wellle/targets.vim'           " change the way i[, i{ works.
+                                    " You don't have to be inside a parenthesis for
+                                    " it to work, it automatically select the correct one.
 
-" when you type f, F etc, just keep hitting f instead of , or ;
-Plug 'rhysd/clever-f.vim'
-"
-" Comment stuff in / out
-" gcc, gcMOTION, gcp paragraph
-" :7,17Commentary
-Plug 'tpope/vim-commentary'
+Plug 'rhysd/clever-f.vim'           " when you type f, F etc, just keep hitting f
 
-" provides some key bindings in insert mode
-Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-commentary'         " Comment stuff in / out
+                                    " gcc, gcMOTION, gcp paragraph
+                                    " :7,17Commentary
 
-" C-n, C-p, C-x to multi-cursor
-Plug 'terryma/vim-multiple-cursors'
-
-" gl, gL<object><critère> pour aligner du texte
-Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-rsi'                " provides some key bindings in insert mode
+Plug 'terryma/vim-multiple-cursors' " C-n, C-p, C-x to multi-cursor
+Plug 'tommcdo/vim-lion'             " gl, gL<object><critère> pour aligner du texte
 
 " snippet management
 Plug 'honza/vim-snippets'
@@ -67,24 +64,22 @@ Plug 'honza/vim-snippets'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'garbas/vim-snipmate'
-
 imap <m-n> <Plug>snipMateNextOrTrigger
 smap <m-n> <Plug>snipMateNextOrTrigger
 " imap <m-p> <Plug>snipMateBack
 smap <m-p> <Plug>snipMateBack
-" }}}
 
-" cosmétique (Airline, gitgutter) {{{
-" list of themes
-" https://github.com/vim-airline/vim-airline/wiki/Screenshots
+""""""""""""""""""""""""""""""""""
+"""""" Comestic   """"""""""""""""
+""""""""""""""""""""""""""""""""""
+
+" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='kalisi'
 set laststatus=2
-
-" change mode display
-let g:airline_mode_map = {
+let g:airline_mode_map = { 
             \ '__' : '-',
             \ 'n'  : 'N',
             \ 'i'  : 'I',
@@ -104,19 +99,46 @@ let g:airline#extensions#tabline#buffer_min_count = 2
 
 let g:airline#extensions#tabline#tabs_label = 't'
 let g:airline#extensions#tabline#buffers_label = 'b'
-Plug 'airblade/vim-gitgutter'
-set updatetime=250
 
-Plug 'edkolev/tmuxline.vim'
-" }}}
+Plug 'edkolev/tmuxline.vim' " make tmux line looks like airline
 
-" some theme {{{
+" Some colorschemes
 Plug 'morhetz/gruvbox'
 Plug 'muellan/am-colors'
 Plug 'junegunn/seoul256.vim'
 Plug 'freeo/vim-kalisi'
-" }}}
 
+" distraction free editing
+Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'latex', 'tex'] }
+Plug 'junegunn/limelight.vim'
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+
+""""""""""""""""""""""""""""""""""
+"""""" syntax   """"""""""""""""""
+""""""""""""""""""""""""""""""""""
+
+Plug 'vim-scripts/fountain.vim'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'lervag/vimtex'
+
+""""""""""""""""""""""""""""""""""
+"""""" Version management   """"""
+""""""""""""""""""""""""""""""""""
+Plug 'airblade/vim-gitgutter' " Git gutter
+set updatetime=250
+
+Plug 'tpope/vim-fugitive'     " Thanks tpope
+
+Plug 'jreybert/vimagit'       " bring magit to vim
+                              " :Magit
+
+""""""""""""""""""""""""""""""""""
+"""""" others   """"""""""""""""""
+""""""""""""""""""""""""""""""""""
 " :Ack [options] {pattern} [{directories}]
 " ? to display keys
 Plug 'mileszs/ack.vim', {'on': 'Ack'}
@@ -141,18 +163,7 @@ Plug 'benmills/vimux'
 Plug 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
-" syntax plugins
-" {{{
-Plug 'vim-scripts/fountain.vim'
-Plug 'PotatoesMaster/i3-vim-syntax'
-"}}}
 
-Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'latex', 'tex'] }
-Plug 'junegunn/limelight.vim'
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
-Plug 'tpope/vim-fugitive'
 
 
 

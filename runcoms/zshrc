@@ -52,6 +52,8 @@ alias ...='../..'
 alias ....='../../..'
 alias .....='../../../..'
 
+alias magit="vim -c MagitOnly"
+
 unalias rm
 
 ################## ALIAS GLOBAUX
@@ -64,6 +66,11 @@ alias -g L='| lolcat '
 alias -s org='emacs -nw '
 alias -s pdf='zathura '
 alias -s tex='editor '
+
+################## ALIAS MOUNT
+
+alias pm='pmount /dev/disk/by-label/'
+alias pum='pumount /dev/disk/by-label/'
 
 ################################################################################
 #                             CUSTOMS SHORTCUTS                                #
