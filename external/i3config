@@ -132,7 +132,7 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 # Toggle sticky
-bindsym $mod+t sticky toggle
+# bindsym $mod+f sticky toggle
 # focus the parent container
 bindsym $mod+q focus parent
 bindsym $mod+Shift+q focus child
@@ -330,7 +330,7 @@ set $cyan	#2AA198
 set $dark #00252E
 
 # new window will have only x pixel border
-new_window pixel 1
+new_window pixel 2
 # hiding borders adjacent to screen edges
 # hide_edge_borders both
 
@@ -372,6 +372,10 @@ bindsym $mod+m bar mode toggle
 
 # Change wallpaper
 bindsym $mod+w exec feh --recursive --randomize --bg-fill ~/Nextcloud/Images/Wallpapers
+
+# compton management
+bindsym $mod+Shift+t exec pkill compton
+bindsym $mod+t exec compton -b
 
 # }}}
 

@@ -16,6 +16,7 @@ nextcloud &
 unclutter -root &
 urxvtd -q -o -f &
 conky -c .conky/conky_clock_stat &
+compton -b &
 
 # exec awesome
 exec ssh-agent i3
