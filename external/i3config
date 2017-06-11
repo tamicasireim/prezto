@@ -10,19 +10,10 @@
 # user config
 set $term urxvt
 
+# launch execution are handled by xinitrc
 
 # ########################################################
-# Startup executions : handled by .xinitrc
-# ########################################################
-# exec_always --no-startup-id nitrogen --restore # wallpaper with nitrogen
-# exec_always --no-startup-id gnome-settings-daemon # make gnome icons looks good
-# exec_always --no-startup-id xrdb -merge ~/.Xressources # source the Xressources files
-# exec --no-startup-id nm-applet # add a wireless icon
-# exec --no-startup-id dropbox start # Dropbox start
-# exec --no-startup-id emacs --daemon
-
-# ########################################################
-# Shortcuts
+# Shortcuts {{{
 # ########################################################
 # modifier : super
 set $mod Mod4
@@ -40,12 +31,8 @@ bindsym $mod+Tab exec "rofi -combi-modi window\,drun\,run -show combi -modi comb
 # start dmenu (a program launcher) with rofi
 # bindsym $mod+d exec rofi -show run
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-
 # kill focused window
-bindsym $mod+c kill
+bindsym $mod+Shift+q kill
 # kill on right click on title
 bindsym --release button3 kill
 
@@ -140,9 +127,8 @@ bindsym $mod+Shift+q focus child
 
 
 #####################################
-# Changing Workspaces
+# Changing Workspaces {{{
 #####################################
-#{{{
 # back and forth when quickly changing workspaces
 workspace_auto_back_and_forth yes
 # move to last workspace
@@ -245,11 +231,15 @@ bindsym $mod+r mode "resize"
 # }}}
 
 # lock screen
-bindsym $mod+Shift+i exec i3lock
+# bindsym $mod+Shift+i exec i3lock
+# needs blurlock to be in /usr/bin/.
+bindsym $mod+Shift+i exec blurlock.sh
 
+#}}}
 
-# rules on applications
-# {{{
+# ########################################################
+# rules on applications # {{{
+# ########################################################
 for_window [class="Pavucontrol"] floating enable, border normal
 for_window [title="Pure Pomodoro"] floating enable, sticky enable
 for_window [title="Fast Tab Switcher"] floating enable, sticky enable
