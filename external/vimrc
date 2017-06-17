@@ -2,7 +2,7 @@ inoremap jk <ESC>
 inoremap <c-j> <ESC>
 set nocompatible
 filetype plugin on
-let mapleader=" " "set leader to space
+let g:mapleader=' ' "set leader to space
 
 augroup reload_vimrc " {
     autocmd!
@@ -14,7 +14,7 @@ augroup automaticquickfix
     autocmd!
     autocmd QuickFixCmdPost [^l]* cwindow
     autocmd QuickFixCmdPost    l* lwindow
-augroup END
+"augroup END
 
 " Plugins with Vim Plug
 " {{{
@@ -52,7 +52,14 @@ Plug 'vim-scripts/matchit.zip' " extends %
 
 Plug 'tpope/vim-vinegar'
 
+if has('nvim') || v:version >= 800
+    Plug 'w0rp/ale'
 
+    nnoremap [j <Plug>(ale_previous_wrap)
+    nnoremap ]j <Plug>(ale_next_wrap)
+
+    let g:ale_lint_on_text_changed='normal'
+endif
 
 """"""""""""""""""""""""""""""""""
 """""" Navigation """"""""""""""""
@@ -71,9 +78,9 @@ nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>T :Tags<CR>
 
 imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-L> <plug>(fzf-complete-path)
+" imap <c-x><c-s-L> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-L> <plug>(fzf-complete-line)
+" imap <c-x><c-L> <plug>(fzf-complete-line)
 
 nnoremap <BS> <C-^>
 
@@ -142,7 +149,7 @@ let g:airline_mode_map = {
 " let g:airline#extensions#tabline#tabs_label = 't'
 " let g:airline#extensions#tabline#buffers_label = 'b'
 
-let g:airline_extensions = ['branch', 'vimtex']
+"let g:airline_extensions = ['branch', 'vimtex']
 
 Plug 'edkolev/tmuxline.vim' " make tmux line looks like airline
 
@@ -184,8 +191,6 @@ Plug 'lervag/vimtex', {'for': ['latex', 'tex']}
 " set updatetime=250
 
 Plug 'tpope/vim-fugitive'     " Thanks tpope
-
-Plug 'jreybert/vimagit', {'on' : 'Magit'}       " bring magit to vim
 
 """"""""""""""""""""""""""""""""""
 """""" others   """"""""""""""""""
@@ -305,6 +310,25 @@ set backspace=indent,eol,start
 autocmd FileType gitcommit exec 'au VimEnter * startinsert'
 
 set modelines=1 " make vim look at the end of file for indent parameters etc.
+
+" split navigation utilisation
+if has('nvim') " mapping specific to terminal
+    tnoremap <A-h> <C-\><C-N><C-w>h
+    tnoremap <A-j> <C-\><C-N><C-w>j
+    tnoremap <A-k> <C-\><C-N><C-w>k
+    tnoremap <A-l> <C-\><C-N><C-w>l
+    tnoremap JK <C-\><C-n>
+endif
+inoremap <A-h> <C-\><C-N><C-w>h
+inoremap <A-j> <C-\><C-N><C-w>j
+inoremap <A-k> <C-\><C-N><C-w>k
+inoremap <A-l> <C-\><C-N><C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
+
+
 " }}}
 
 function! StripTrailingWhitespace()
