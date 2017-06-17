@@ -12,7 +12,7 @@ caps2esc & # from https://github.com/alexandre/caps2esc
 nm-applet &
 # indicator-diskman &
 # dropbox start &
-nextcloud &
+# nextcloud &
 unclutter -root &
 urxvtd -q -o -f &
 conky -c .conky/conky_clock_stat &

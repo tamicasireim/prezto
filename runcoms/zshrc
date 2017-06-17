@@ -22,18 +22,24 @@ fi
 
 # export TERM=xterm-256color
 
-# changed path
-PATH=~/.local/bin:$PATH
 
 ################################################################################
-#                                  FZF                                         #
+#                                  sourcing                                    #
 ################################################################################
 
+# FZF
 # Alt C to cd into selected directory
 # C-R to search into history
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 export FZF_DEFAULT_COMMAND='ag -g ""'
+
+# changed path
+PATH=~/.local/bin:$PATH
+
+# tmuxinator completion
+if [ -f ~/.bin/tmuxinator.zsh ]; then
+    source ~/.bin/tmuxinator.zsh
+fi
 
 ################################################################################
 #                             CUSTOMS ALIASES                                  #
@@ -45,6 +51,8 @@ alias e='editor'
 alias v='vim'
 alias n='nvim'
 alias enw='emacs -nw'
+
+alias mux='tmuxinator'
 
 alias grh='git reset --hard'
 
@@ -75,6 +83,10 @@ alias -s tex='editor '
 alias pm='pmount /dev/disk/by-label/'
 alias pum='pumount /dev/disk/by-label/'
 
+################## Doc linking
+
+alias python-doc='firefox /usr/share/doc/python3.5-doc/html/index.html'
+
 ################################################################################
 #                             CUSTOMS SHORTCUTS                                #
 ################################################################################
@@ -99,11 +111,13 @@ bindkey -M viins ' ' magic-space
 #                             CUSTOMS FUNCTIONS                                #
 ################################################################################
 
+################# create a directory and jump to it
 mcd () {
     mkdir -p $1
     cd $1
 }
 
+################# extract function
 alias ex='extract'
 function extract {
     if [ -z "$1" ]; then
@@ -137,6 +151,7 @@ function extract {
     fi
 }
 
+################ TMUX session chooser
 tm() {
     local session
     newsession=${1:-new}
@@ -144,3 +159,4 @@ tm() {
         fzf --query="$1" --select-1 --exit-0) &&
         tmux attach-session -t "$session" || tmux new-session -s $newsession
 }
+

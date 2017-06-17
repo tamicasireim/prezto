@@ -1,0 +1,6 @@
+pidof compton
+if [ "$?" == "0" ] ; then
+	pkill compton
+else
+	compton -b
+fi
